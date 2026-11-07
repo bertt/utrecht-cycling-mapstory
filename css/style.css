@@ -270,6 +270,7 @@ p { margin: 0 0 0.9em; }
 }
 
 /* ---------- Popups ---------- */
+.story-popup { z-index: 6; }
 .story-popup .maplibregl-popup-content {
   font-family: var(--font-body); padding: 16px 18px 14px; border-radius: var(--radius);
   box-shadow: 0 10px 30px rgba(15, 76, 92, 0.25);

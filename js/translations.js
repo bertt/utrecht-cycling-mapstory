@@ -35,7 +35,7 @@ const translations = {
       parking: "Fietsparkeren en overstappen",
       redesign: "Herinrichting",
       cyclestreet: "Fietsstraat",
-      regional: "Regionale verbindingen"
+      regional: "F-routes (doorfietsroutes)"
     },
     categories: {
       hoofdfietsroute: "Hoofdfietsroute",
@@ -131,7 +131,7 @@ const translations = {
       parking: "Bicycle parking and interchanges",
       redesign: "Urban redesign",
       cyclestreet: "Bicycle street",
-      regional: "Regional connections"
+      regional: "F-routes (fast cycle routes)"
     },
     categories: {
       hoofdfietsroute: "Main cycling route",

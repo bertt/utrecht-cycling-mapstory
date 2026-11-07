@@ -46,18 +46,38 @@
   // Base colour and brighter "active" colour per project category.
   const CATEGORY_COLOR = {
     hoofdfietsroute: COLORS.blue,
-    doorfietsroute: COLORS.teal,
+    doorfietsroute: COLORS.green,
     herinrichting: COLORS.orange,
     fietsenstalling: COLORS.purple,
     buurtstalling: COLORS.purple
   };
   const CATEGORY_BRIGHT = {
     hoofdfietsroute: '#2aa0ff',
-    doorfietsroute: '#1a8aa3',
+    doorfietsroute: '#3cb371',
     herinrichting: '#ff7a52',
     fietsenstalling: '#a98bff',
     buurtstalling: '#a98bff'
   };
+  // Every F-route gets its own colour so routes can be told apart
+  const F_ROUTE_COLORS = {
+    'doorfietsroute-utrecht-amersfoort': '#2e8b57',
+    'doorfietsroute-utrecht-hilversum': '#7b3fa0',
+    'dom-tot-damroute': '#c77d00',
+    'fietsroute-utrecht-houten-f409': '#0f4c5c',
+    'doorfietsroute-woerden-utrecht-f12': '#6a8d1f',
+    'doorfietsroute-utrecht-ijsselstein-f408': '#00897b',
+    'doorfietsroute-usp-veenendaal-f225': '#8d5524',
+    'doorfietsroute-hilversum-amersfoort-f1': '#3f51b5',
+    'doorfietsroute-houten-castellum-usp-f27': '#5d6d7e',
+    'doorfietsroute-houten-lage-weide-f409': '#00acc1',
+    'doorfietsroute-amersfoort-bunschoten-f199': '#7cb342',
+    'doorfietsroute-houten-utrecht-centrum': '#b0719a',
+    'doorfietsroute-houten-culemborg': '#a1887f',
+    'doorfietsroute-amersfoort-usp': '#4a8fa8',
+    'doorfietsroute-mijdrecht-schiphol': '#9e9d24'
+  };
+  const colorForFeature = (p) => F_ROUTE_COLORS[p.id] || CATEGORY_COLOR[p.category] || COLORS.gray;
+
   // Line widths (px at mid zoom) per category: thicker for main routes.
   const CATEGORY_WIDTH = {
     hoofdfietsroute: 4,
@@ -338,7 +358,7 @@
   function renderLegend() {
     const items = [
       { key: 'main', color: COLORS.blue, type: 'line' },
-      { key: 'regional', color: COLORS.teal, type: 'line' },
+      { key: 'regional', color: 'linear-gradient(90deg,#2e8b57,#7b3fa0,#c77d00,#00acc1,#3f51b5)', type: 'line' },
       { key: 'cyclestreet', color: COLORS.cyclestreet, type: 'line' },
       { key: 'redesign', color: COLORS.orange, type: 'dot' }
     ];
@@ -382,8 +402,8 @@
 
   function colorExpression(config) {
     const active = activeExpression(config.ids);
-    const base = categoryMatch(CATEGORY_COLOR, COLORS.gray);
-    const bright = categoryMatch(CATEGORY_BRIGHT, COLORS.gray);
+    const base = ['match', ['get', 'id'], ...Object.entries(F_ROUTE_COLORS).flat(), categoryMatch(CATEGORY_COLOR, COLORS.gray)];
+    const bright = ['match', ['get', 'id'], ...Object.entries(F_ROUTE_COLORS).flat(), categoryMatch(CATEGORY_BRIGHT, COLORS.gray)];
     const h = config.highlight;
     return [
       'case',
@@ -421,12 +441,22 @@
     // Bicycle streets (OSM data) sit below the project routes
     map.addSource(CYCLESTREETS_SOURCE, { type: 'geojson', data: state.cyclestreets });
     map.addLayer({
+      id: 'cyclestreet-halo', type: 'line', source: CYCLESTREETS_SOURCE, layout: lineLayout,
+      filter: ['==', ['get', 'name'], ''],
+      paint: { 'line-color': '#ffd23f', 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 8, 16, 20], 'line-opacity': 0.8, 'line-blur': 2 }
+    });
+    map.addLayer({
       id: 'cyclestreet-casing', type: 'line', source: CYCLESTREETS_SOURCE, layout: lineLayout,
       paint: { 'line-color': '#ffffff', 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 2, 16, 8], 'line-opacity': 0.9 }
     });
     map.addLayer({
       id: 'cyclestreet-line', type: 'line', source: CYCLESTREETS_SOURCE, layout: lineLayout,
-      paint: { 'line-color': COLORS.cyclestreet, 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 1, 16, 5] }
+      paint: { 'line-color': COLORS.cyclestreet, 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 1.5, 16, 5] }
+    });
+    // Wide invisible layer so thin bicycle streets are easy to hover and click
+    map.addLayer({
+      id: 'cyclestreet-hit', type: 'line', source: CYCLESTREETS_SOURCE, layout: lineLayout,
+      paint: { 'line-color': '#000000', 'line-width': 18, 'line-opacity': 0 }
     });
 
     map.addLayer({
@@ -512,7 +542,7 @@
         'text-allow-overlap': false
       },
       paint: {
-        'text-color': '#0f4c5c',
+        'text-color': '#14653a',
         'text-halo-color': '#ffffff',
         'text-halo-width': 2
       }
@@ -554,9 +584,9 @@
   }
 
   function bindLayerInteractions() {
-    map.on('mouseenter', 'cyclestreet-line', () => { map.getCanvas().style.cursor = 'pointer'; });
-    map.on('mouseleave', 'cyclestreet-line', () => { map.getCanvas().style.cursor = ''; });
-    map.on('click', 'cyclestreet-line', (e) => {
+    map.on('mouseenter', 'cyclestreet-hit', () => { map.getCanvas().style.cursor = 'pointer'; });
+    map.on('mouseleave', 'cyclestreet-hit', () => { map.getCanvas().style.cursor = ''; });
+    map.on('click', 'cyclestreet-hit', (e) => {
       // Project layers take precedence when a project line overlaps a bicycle street
       if (map.queryRenderedFeatures(e.point, { layers: [LAYER_IDS.solid, LAYER_IDS.planned, LAYER_IDS.fill] }).length) return;
       openCyclestreet(e.features[0].properties.name, e.lngLat);
@@ -596,7 +626,7 @@
       const isParking = p.category === 'fietsenstalling' || p.category === 'buurtstalling';
       el.className = 'marker' + (p.major ? ' marker-major' : '') + (isParking ? ' marker-minor' : '')
         + (UPCOMING.includes(p.status) ? ' marker-upcoming' : '');
-      el.style.setProperty('--marker-color', CATEGORY_COLOR[p.category] || COLORS.gray);
+      el.style.setProperty('--marker-color', colorForFeature(p));
       el.innerHTML = '<span class="marker-pulse"></span><span class="marker-dot"></span>';
       el.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -626,7 +656,7 @@
       const inFocus = !config.ids || config.ids.includes(id);
       element.classList.toggle('is-dimmed', !inFocus);
       const p = state.byId.get(id).properties;
-      const color = config.highlight && inFocus ? config.highlight.color : (CATEGORY_COLOR[p.category] || COLORS.gray);
+      const color = config.highlight && inFocus ? config.highlight.color : colorForFeature(p);
       element.style.setProperty('--marker-color', color);
     });
   }
@@ -646,6 +676,7 @@
       popup.remove();
     }
     setFeatureState(state.selectedId, 'selected', false);
+    if (map.getLayer('cyclestreet-halo')) map.setFilter('cyclestreet-halo', ['==', ['get', 'name'], '']);
     state.selectedId = null;
     state.popupId = null;
   }
@@ -700,11 +731,17 @@
 
   function openCyclestreet(name, lngLat) {
     closePopup();
+    map.setFilter('cyclestreet-halo', ['==', ['get', 'name'], name]);
     const popup = new maplibregl.Popup({ className: 'story-popup', maxWidth: '320px', offset: 12, focusAfterOpen: false })
       .setLngLat(lngLat)
       .setHTML(cyclestreetHTML(name))
       .addTo(map);
-    popup.on('close', () => { if (state.popup === popup) state.popup = null; });
+    popup.on('close', () => {
+      if (state.popup === popup) {
+        state.popup = null;
+        map.setFilter('cyclestreet-halo', ['==', ['get', 'name'], '']);
+      }
+    });
     state.popup = popup;
     labelPopupClose();
   }
