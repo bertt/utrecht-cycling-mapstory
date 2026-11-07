@@ -67,13 +67,13 @@
     'doorfietsroute-woerden-utrecht-f12': '#6a8d1f',
     'doorfietsroute-utrecht-ijsselstein-f408': '#00897b',
     'doorfietsroute-usp-veenendaal-f225': '#8d5524',
-    'doorfietsroute-hilversum-amersfoort-f1': '#3f51b5',
+    'doorfietsroute-hilversum-amersfoort-f1': '#d81b60',
     'doorfietsroute-houten-castellum-usp-f27': '#5d6d7e',
-    'doorfietsroute-houten-lage-weide-f409': '#00acc1',
+    'doorfietsroute-houten-lage-weide-f409': '#e0a800',
     'doorfietsroute-amersfoort-bunschoten-f199': '#7cb342',
     'doorfietsroute-houten-utrecht-centrum': '#b0719a',
     'doorfietsroute-houten-culemborg': '#a1887f',
-    'doorfietsroute-amersfoort-usp': '#4a8fa8',
+    'doorfietsroute-amersfoort-usp': '#6d4c41',
     'doorfietsroute-mijdrecht-schiphol': '#9e9d24'
   };
   const colorForFeature = (p) => F_ROUTE_COLORS[p.id] || CATEGORY_COLOR[p.category] || COLORS.gray;
@@ -358,7 +358,7 @@
   function renderLegend() {
     const items = [
       { key: 'main', color: COLORS.blue, type: 'line' },
-      { key: 'regional', color: 'linear-gradient(90deg,#2e8b57,#7b3fa0,#c77d00,#00acc1,#3f51b5)', type: 'line' },
+      { key: 'regional', color: 'linear-gradient(90deg,#2e8b57,#7b3fa0,#c77d00,#d81b60,#8d5524)', type: 'line' },
       { key: 'cyclestreet', color: COLORS.cyclestreet, type: 'line' },
       { key: 'redesign', color: COLORS.orange, type: 'dot' }
     ];

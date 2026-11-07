@@ -29,13 +29,13 @@ const translations = {
     cyclestreetSource: "Bron: OpenStreetMap-bijdragers.",
     legendUpcoming: "Komt: in voorbereiding of gepland",
     legend: {
-      main: "Hoofdfietsroutes",
+      main: "Hoofdfietsroutes (stad, blauw)",
       green: "Groen, water en klimaat",
       safety: "Veiligheid en rustiger verkeer",
       parking: "Fietsparkeren en overstappen",
       redesign: "Herinrichting",
       cyclestreet: "Fietsstraat",
-      regional: "F-routes (doorfietsroutes)"
+      regional: "F-routes (regionaal, elke route eigen kleur)"
     },
     categories: {
       hoofdfietsroute: "Hoofdfietsroute",
@@ -125,13 +125,13 @@ const translations = {
     cyclestreetSource: "Source: OpenStreetMap contributors.",
     legendUpcoming: "Coming: in preparation or planned",
     legend: {
-      main: "Main cycling routes",
+      main: "Main cycling routes (city, blue)",
       green: "Green space, water and climate",
       safety: "Safety and calmer traffic",
       parking: "Bicycle parking and interchanges",
       redesign: "Urban redesign",
       cyclestreet: "Bicycle street",
-      regional: "F-routes (fast cycle routes)"
+      regional: "F-routes (regional, each route its own colour)"
     },
     categories: {
       hoofdfietsroute: "Main cycling route",
