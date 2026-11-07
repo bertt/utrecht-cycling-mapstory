@@ -10,6 +10,7 @@ Built with vanilla HTML, CSS and JavaScript, [MapLibre GL JS](https://maplibre.o
 
 - Dutch (`nl`) is the default; English (`en`) is available via the **NL | EN** switcher in the header.
 - The choice is stored in `localStorage` (`utrecht-mapstory-lang`).
+- Share a direct English link with `?lang=en` (e.g. `https://bertt.github.io/utrecht-cycling-mapstory/?lang=en`); `?lang=nl` forces Dutch. The parameter overrides the stored choice.
 - Switching language updates all visible text, accessibility labels, the `<html lang>` attribute and any open map popup.
 
 ## Run locally

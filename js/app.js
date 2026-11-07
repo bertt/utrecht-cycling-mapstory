@@ -201,6 +201,12 @@
     document.documentElement.lang = lang;
     if (persist) {
       try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* storage may be unavailable */ }
+      // Keep the shareable URL in sync with the chosen language
+      const url = new URL(window.location.href);
+      if (url.searchParams.has('lang')) {
+        url.searchParams.set('lang', lang);
+        history.replaceState(null, '', url);
+      }
     }
 
     $$('.lang-btn').forEach((btn) => {
@@ -217,6 +223,9 @@
   }
 
   function getStoredLanguage() {
+    // A ?lang=en / ?lang=nl URL parameter takes priority over the stored preference
+    const param = new URLSearchParams(window.location.search).get('lang');
+    if (SUPPORTED_LANGS.includes(param)) return param;
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
       return SUPPORTED_LANGS.includes(stored) ? stored : DEFAULT_LANG;
