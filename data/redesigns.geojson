@@ -1,0 +1,513 @@
+{
+  "type": "FeatureCollection",
+  "name": "redesigns",
+  "note": "Approximate geocoded points (Nominatim/OpenStreetMap) for utrecht.nl traffic projects. Not official project boundaries; verify before publication.",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ledig-erf-deel-catharijnesingel-en-bleekstraat-opnieuw-inrichten",
+        "title": {
+          "nl": "Ledig Erf, Catharijnesingel en Bleekstraat",
+          "en": "Ledig Erf, Catharijnesingel and Bleekstraat"
+        },
+        "category": "herinrichting",
+        "status": "in voorbereiding",
+        "major": false,
+        "planning": {
+          "nl": "Planning: 2028",
+          "en": "Planning: 2028"
+        },
+        "description": {
+          "nl": "We verbeteren het Ledig Erf, een deel van de Catharijnesingel en de Bleekstraat. We maken meer ruimte voor lopen, fietsen en groen.",
+          "en": "Ledig Erf, Catharijnesingel and Bleekstraat. The street is being redesigned with more room for walking, cycling and greenery."
+        },
+        "goals": "fiets, groen, veiligheid, leefbaarheid",
+        "benefits": {
+          "nl": {
+            "cycling": "Meer en veiligere ruimte voor fietsers.",
+            "green": "Meer groen en ruimte om te verblijven.",
+            "safety": "Rustiger verkeer en veiligere oversteken."
+          },
+          "en": {
+            "cycling": "More and safer space for cyclists.",
+            "green": "More greenery and space to linger.",
+            "safety": "Calmer traffic and safer crossings."
+          }
+        },
+        "connections": {
+          "nl": "Onderdeel van de verkeersprojecten van gemeente Utrecht.",
+          "en": "Part of the traffic projects of the Municipality of Utrecht."
+        },
+        "url": "https://www.utrecht.nl/wonen-en-leven/verkeer/verkeersprojecten/aanpak-zuidpoort-en-omgeving/ledig-erf-deel-catharijnesingel-en-bleekstraat-opnieuw-inrichten"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.12442,
+          52.08128
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "catharijnesingel-inrichten-als-bestemming",
+        "title": {
+          "nl": "Catharijnesingel inrichten als bestemming",
+          "en": "Catharijnesingel as a destination"
+        },
+        "category": "herinrichting",
+        "status": "in voorbereiding",
+        "major": false,
+        "planning": {
+          "nl": "Zie de projectpagina voor de actuele planning",
+          "en": "See the project page for the latest planning"
+        },
+        "description": {
+          "nl": "We sloten de Catharijnesingel af voor doorgaand autoverkeer en voor motoren. Zodat we een aantrekkelijke en levendige stad creëren.",
+          "en": "Catharijnesingel as a destination. The street is being redesigned with more room for walking, cycling and greenery."
+        },
+        "goals": "fiets, groen, veiligheid, leefbaarheid",
+        "benefits": {
+          "nl": {
+            "cycling": "Meer en veiligere ruimte voor fietsers.",
+            "green": "Meer groen en ruimte om te verblijven.",
+            "safety": "Rustiger verkeer en veiligere oversteken."
+          },
+          "en": {
+            "cycling": "More and safer space for cyclists.",
+            "green": "More greenery and space to linger.",
+            "safety": "Calmer traffic and safer crossings."
+          }
+        },
+        "connections": {
+          "nl": "Onderdeel van de verkeersprojecten van gemeente Utrecht.",
+          "en": "Part of the traffic projects of the Municipality of Utrecht."
+        },
+        "url": "https://www.utrecht.nl/wonen-en-leven/verkeer/verkeersprojecten/binnenstad/catharijnesingel-inrichten-als-bestemming"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.11287,
+          52.09117
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "boorstraat-tunnel-voor-fietsers-en-voetgangers",
+        "title": {
+          "nl": "Boorstraat: tunnel voor fietsers en voetgangers",
+          "en": "Boorstraat: cycling and pedestrian tunnel"
+        },
+        "category": "herinrichting",
+        "status": "in voorbereiding",
+        "major": false,
+        "planning": {
+          "nl": "Planning: Nog",
+          "en": "Planning: Nog"
+        },
+        "description": {
+          "nl": "We onderzochten de bouw van een nieuwe tunnel voor fietsers en voetgangers bij de Boorstraat. Of er een tunnel komt is nu nog niet zeker.",
+          "en": "Boorstraat: cycling and pedestrian tunnel. A new or improved crossing that connects routes for pedestrians and cyclists."
+        },
+        "goals": "fiets, veiligheid",
+        "benefits": {
+          "nl": {
+            "cycling": "Betere verbindingen voor fietsers.",
+            "green": "",
+            "safety": "Veiliger oversteken."
+          },
+          "en": {
+            "cycling": "Better connections for cyclists.",
+            "green": "",
+            "safety": "Safer crossings."
+          }
+        },
+        "connections": {
+          "nl": "Onderdeel van de verkeersprojecten van gemeente Utrecht.",
+          "en": "Part of the traffic projects of the Municipality of Utrecht."
+        },
+        "url": "https://www.utrecht.nl/wonen-en-leven/verkeer/verkeersprojecten/noordwest/boorstraat-tunnel-voor-fietsers-en-voetgangers"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.10496,
+          52.0971
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "castellumlaan-opnieuw-inrichten",
+        "title": {
+          "nl": "Castellumlaan opnieuw inrichten",
+          "en": "Castellumlaan redesign"
+        },
+        "category": "herinrichting",
+        "status": "in voorbereiding",
+        "major": false,
+        "planning": {
+          "nl": "Planning: Nog",
+          "en": "Planning: Nog"
+        },
+        "description": {
+          "nl": "We willen de Castellumlaan zo veilig, aantrekkelijk en bereikbaar mogelijk maken. Daarom richten we de Castellumlaan opnieuw in.",
+          "en": "Castellumlaan redesign. The street is being redesigned with more room for walking, cycling and greenery."
+        },
+        "goals": "fiets, groen, veiligheid, leefbaarheid",
+        "benefits": {
+          "nl": {
+            "cycling": "Meer en veiligere ruimte voor fietsers.",
+            "green": "Meer groen en ruimte om te verblijven.",
+            "safety": "Rustiger verkeer en veiligere oversteken."
+          },
+          "en": {
+            "cycling": "More and safer space for cyclists.",
+            "green": "More greenery and space to linger.",
+            "safety": "Calmer traffic and safer crossings."
+          }
+        },
+        "connections": {
+          "nl": "Onderdeel van de verkeersprojecten van gemeente Utrecht.",
+          "en": "Part of the traffic projects of the Municipality of Utrecht."
+        },
+        "url": "https://www.utrecht.nl/wonen-en-leven/verkeer/verkeersprojecten/vleuten-de-meern/castellumlaan-opnieuw-inrichten"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.03693,
+          52.08296
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "meernbrug-hefbrug-centrum-de-meern-verbeteren-verkeersveiligheid",
+        "title": {
+          "nl": "Meernbrug: verkeersveiligheid",
+          "en": "Meernbrug: road safety"
+        },
+        "category": "herinrichting",
+        "status": "in voorbereiding",
+        "major": false,
+        "planning": {
+          "nl": "Zie de projectpagina voor de actuele planning",
+          "en": "See the project page for the latest planning"
+        },
+        "description": {
+          "nl": "Omwonenden en weggebruikers maken zich zorgen over de verkeersveiligheid bij de kleine hefbrug in het centrum van De Meern. We hebben in 2025 een onafhankelijk verkeersonderzoek laten uitvoeren.",
+          "en": "Meernbrug: road safety. A new or improved crossing that connects routes for pedestrians and cyclists."
+        },
+        "goals": "fiets, veiligheid",
+        "benefits": {
+          "nl": {
+            "cycling": "Betere verbindingen voor fietsers.",
+            "green": "",
+            "safety": "Veiliger oversteken."
+          },
+          "en": {
+            "cycling": "Better connections for cyclists.",
+            "green": "",
+            "safety": "Safer crossings."
+          }
+        },
+        "connections": {
+          "nl": "Onderdeel van de verkeersprojecten van gemeente Utrecht.",
+          "en": "Part of the traffic projects of the Municipality of Utrecht."
+        },
+        "url": "https://www.utrecht.nl/wonen-en-leven/verkeer/verkeersprojecten/vleuten-de-meern/meernbrug-hefbrug-centrum-de-meern-verbeteren-verkeersveiligheid"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.03689,
+          52.08289
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "vervangen-loobrug",
+        "title": {
+          "nl": "Loobrug vervangen",
+          "en": "Loobrug replacement"
+        },
+        "category": "herinrichting",
+        "status": "in voorbereiding",
+        "major": false,
+        "planning": {
+          "nl": "Planning: begin 2027",
+          "en": "Planning: begin 2027"
+        },
+        "description": {
+          "nl": "Er is schade aan de fundering van de Loobrug en de brug is aan het verzakken. De brug is niet meer veilig. Daarom hebben we deze afgesloten voor auto's. Ook kunnen er geen boten onderdoor. De aparte brug voor fietsers en voetgangers blijft gewoon open. ",
+          "en": "Loobrug replacement. A new or improved crossing that connects routes for pedestrians and cyclists."
+        },
+        "goals": "fiets, veiligheid",
+        "benefits": {
+          "nl": {
+            "cycling": "Betere verbindingen voor fietsers.",
+            "green": "",
+            "safety": "Veiliger oversteken."
+          },
+          "en": {
+            "cycling": "Better connections for cyclists.",
+            "green": "",
+            "safety": "Safer crossings."
+          }
+        },
+        "connections": {
+          "nl": "Onderdeel van de verkeersprojecten van gemeente Utrecht.",
+          "en": "Part of the traffic projects of the Municipality of Utrecht."
+        },
+        "url": "https://www.utrecht.nl/wonen-en-leven/verkeer/verkeersprojecten/vleuten-de-meern/vervangen-loobrug"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.01981,
+          52.08592
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "welgelegen-en-den-hommel-opnieuw-inrichten",
+        "title": {
+          "nl": "Welgelegen en Den Hommel",
+          "en": "Welgelegen and Den Hommel"
+        },
+        "category": "herinrichting",
+        "status": "in voorbereiding",
+        "major": false,
+        "planning": {
+          "nl": "Zie de projectpagina voor de actuele planning",
+          "en": "See the project page for the latest planning"
+        },
+        "description": {
+          "nl": "Het riool en het meeste asfalt van de wegen in de buurten Welgelegen en Den Hommel zijn toe aan vervanging. Ook willen we de straten veiliger en groener inrichten. Zo maken we de straten geschikt voor klimaatverandering en de omgeving prettiger om te wonen.",
+          "en": "Welgelegen and Den Hommel. The street is being redesigned with more room for walking, cycling and greenery."
+        },
+        "goals": "fiets, groen, veiligheid, leefbaarheid",
+        "benefits": {
+          "nl": {
+            "cycling": "Meer en veiligere ruimte voor fietsers.",
+            "green": "Meer groen en ruimte om te verblijven.",
+            "safety": "Rustiger verkeer en veiligere oversteken."
+          },
+          "en": {
+            "cycling": "More and safer space for cyclists.",
+            "green": "More greenery and space to linger.",
+            "safety": "Calmer traffic and safer crossings."
+          }
+        },
+        "connections": {
+          "nl": "Onderdeel van de verkeersprojecten van gemeente Utrecht.",
+          "en": "Part of the traffic projects of the Municipality of Utrecht."
+        },
+        "url": "https://www.utrecht.nl/wonen-en-leven/verkeer/verkeersprojecten/west/welgelegen-en-den-hommel-opnieuw-inrichten"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.08797,
+          52.08226
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "kanaleneiland-zuid-midden-opnieuw-inrichten",
+        "title": {
+          "nl": "Kanaleneiland-Zuid midden",
+          "en": "Kanaleneiland-Zuid centre"
+        },
+        "category": "herinrichting",
+        "status": "in voorbereiding",
+        "major": false,
+        "planning": {
+          "nl": "Zie de projectpagina voor de actuele planning",
+          "en": "See the project page for the latest planning"
+        },
+        "description": {
+          "nl": "We richten Kaneleneiland-Zuid midden opnieuw in: we vervangen het wegdek, er komt een nieuw riool, er komt meer ruimte voor groen en we verbeteren de verkeersveiligheid voor voetgangers en fietsers.",
+          "en": "Kanaleneiland-Zuid centre. The street is being redesigned with more room for walking, cycling and greenery."
+        },
+        "goals": "fiets, groen, veiligheid, leefbaarheid",
+        "benefits": {
+          "nl": {
+            "cycling": "Meer en veiligere ruimte voor fietsers.",
+            "green": "Meer groen en ruimte om te verblijven.",
+            "safety": "Rustiger verkeer en veiligere oversteken."
+          },
+          "en": {
+            "cycling": "More and safer space for cyclists.",
+            "green": "More greenery and space to linger.",
+            "safety": "Calmer traffic and safer crossings."
+          }
+        },
+        "connections": {
+          "nl": "Onderdeel van de verkeersprojecten van gemeente Utrecht.",
+          "en": "Part of the traffic projects of the Municipality of Utrecht."
+        },
+        "url": "https://www.utrecht.nl/wonen-en-leven/verkeer/verkeersprojecten/zuidwest/kanaleneiland-zuid-midden-opnieuw-inrichten"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.1086,
+          52.05542
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "socrateslaan-nieuwe-inrichting",
+        "title": {
+          "nl": "Socrateslaan opnieuw inrichten",
+          "en": "Socrateslaan redesign"
+        },
+        "category": "herinrichting",
+        "status": "in uitvoering",
+        "major": false,
+        "planning": {
+          "nl": "Planning: voorjaar 2027",
+          "en": "Planning: voorjaar 2027"
+        },
+        "description": {
+          "nl": "De Socrateslaan wordt een laan met meer ruimte voor fietsers en voetgangers. Zo verbeteren we de verkeersveiligheid, gaat oversteken makkelijker en wordt de laan mooier en leefbaarder.",
+          "en": "Socrateslaan redesign. The street is being redesigned with more room for walking, cycling and greenery."
+        },
+        "goals": "fiets, groen, veiligheid, leefbaarheid",
+        "benefits": {
+          "nl": {
+            "cycling": "Meer en veiligere ruimte voor fietsers.",
+            "green": "Meer groen en ruimte om te verblijven.",
+            "safety": "Rustiger verkeer en veiligere oversteken."
+          },
+          "en": {
+            "cycling": "More and safer space for cyclists.",
+            "green": "More greenery and space to linger.",
+            "safety": "Calmer traffic and safer crossings."
+          }
+        },
+        "connections": {
+          "nl": "Onderdeel van de verkeersprojecten van gemeente Utrecht.",
+          "en": "Part of the traffic projects of the Municipality of Utrecht."
+        },
+        "url": "https://www.utrecht.nl/wonen-en-leven/verkeer/verkeersprojecten/zuidwest/socrateslaan-nieuwe-inrichting"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.11291,
+          52.06715
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "waalstraat-en-zijldiepstraat-opnieuw-inrichten",
+        "title": {
+          "nl": "Waalstraat, Zijldiepstraat en Merwedeplantsoen",
+          "en": "Waalstraat, Zijldiepstraat and Merwedeplantsoen"
+        },
+        "category": "herinrichting",
+        "status": "in voorbereiding",
+        "major": false,
+        "planning": {
+          "nl": "Planning: eind 2028",
+          "en": "Planning: eind 2028"
+        },
+        "description": {
+          "nl": "De Waalstraat en de Zijldiepstraat krijgen een nieuwe inrichting. We maken ruimte voor langzaam verkeer van en naar Merwede. ",
+          "en": "Waalstraat, Zijldiepstraat and Merwedeplantsoen. The street is being redesigned with more room for walking, cycling and greenery."
+        },
+        "goals": "fiets, groen, veiligheid, leefbaarheid",
+        "benefits": {
+          "nl": {
+            "cycling": "Meer en veiligere ruimte voor fietsers.",
+            "green": "Meer groen en ruimte om te verblijven.",
+            "safety": "Rustiger verkeer en veiligere oversteken."
+          },
+          "en": {
+            "cycling": "More and safer space for cyclists.",
+            "green": "More greenery and space to linger.",
+            "safety": "Calmer traffic and safer crossings."
+          }
+        },
+        "connections": {
+          "nl": "Onderdeel van de verkeersprojecten van gemeente Utrecht.",
+          "en": "Part of the traffic projects of the Municipality of Utrecht."
+        },
+        "url": "https://www.utrecht.nl/wonen-en-leven/verkeer/verkeersprojecten/zuidwest/waalstraat-en-zijldiepstraat-opnieuw-inrichten"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.11243,
+          52.07012
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "biltse-rading-verbeteren-verkeersveiligheid",
+        "title": {
+          "nl": "Biltse Rading: verkeersveiligheid",
+          "en": "Biltse Rading: road safety"
+        },
+        "category": "herinrichting",
+        "status": "in voorbereiding",
+        "major": false,
+        "planning": {
+          "nl": "Zie de projectpagina voor de actuele planning",
+          "en": "See the project page for the latest planning"
+        },
+        "description": {
+          "nl": "We passen de maximumsnelheid aan naar 50 kilometer per uur. Zo maken we de Biltse Rading veiliger. ",
+          "en": "Biltse Rading: road safety. Measures to make traffic safer for pedestrians and cyclists."
+        },
+        "goals": "fiets, veiligheid",
+        "benefits": {
+          "nl": {
+            "cycling": "Veiliger fietsen.",
+            "green": "",
+            "safety": "Aanpassingen die de verkeersveiligheid vergroten."
+          },
+          "en": {
+            "cycling": "Safer cycling.",
+            "green": "",
+            "safety": "Changes that improve road safety."
+          }
+        },
+        "connections": {
+          "nl": "Onderdeel van de verkeersprojecten van gemeente Utrecht.",
+          "en": "Part of the traffic projects of the Municipality of Utrecht."
+        },
+        "url": "https://www.utrecht.nl/wonen-en-leven/verkeer/verkeersprojecten/noordoost/biltse-rading-verbeteren-verkeersveiligheid"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          5.14752,
+          52.10242
+        ]
+      }
+    }
+  ]
+}
