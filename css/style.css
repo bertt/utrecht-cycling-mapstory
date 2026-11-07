@@ -236,6 +236,10 @@ p { margin: 0 0 0.9em; }
 .swatch-solid { background: var(--muted); }
 .swatch-now { background: var(--muted); border-color: #fff; }
 .swatch-upcoming { background: #fff; border: 2px solid var(--muted); }
+.legend-list li.legend-group { display: block; }
+.legend-froutes { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3px 10px; font-size: 0.7rem; color: var(--muted); }
+.legend-froutes li { gap: 6px; }
+.legend-froutes .swatch { width: 16px; height: 5px; border-radius: 3px; }
 .legend-sep { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--line); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
 .marker-upcoming .marker-dot { background: #fff; border-color: var(--marker-color); }
 
