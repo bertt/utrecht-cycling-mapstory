@@ -87,7 +87,19 @@ const dom = await getJson(`${BASE}/Doorfietsroute_Dom_tot_Dam/FeatureServer/2/qu
 const domParts = dom.features.flatMap((f) => lines(f.geometry));
 setGeometry('routes', 'dom-tot-damroute', toGeometry(domParts));
 
-// Study routes (sketches in RD New)
+// Study routes (sketches in RD New). The sketches are straight schematic lines, so they
+// are snapped to the cycling network with the OSM bike router, using the sketch vertices as waypoints.
+const ROUTER = 'https://routing.openstreetmap.de/routed-bike/route/v1/driving/';
+const snap = async (path) => {
+  const waypoints = path.map((c) => c.join(',')).join(';');
+  try {
+    const res = await getJson(`${ROUTER}${waypoints}?overview=full&geometries=geojson&continue_straight=false`);
+    return res.routes[0].geometry.coordinates;
+  } catch (error) {
+    console.warn('Snapping failed, keeping the straight sketch:', error.message);
+    return path;
+  }
+};
 const sketchMap = await getJson(SKETCH_MAP);
 const sketchLayer = sketchMap.operationalLayers[0].featureCollection.layers.find((l) => l.layerDefinition.geometryType === 'esriGeometryPolyline');
 for (const feature of sketchLayer.featureSet.features) {
@@ -95,7 +107,7 @@ for (const feature of sketchLayer.featureSet.features) {
   const c = centroid(parts);
   const spec = SKETCHES.find((s) => s.test(c));
   if (!spec) { console.warn('Unmatched sketch at', c); continue; }
-  setGeometry(fileOf(spec.id), spec.id, toGeometry(parts));
+  setGeometry(fileOf(spec.id), spec.id, toGeometry(await Promise.all(parts.map(snap))));
 }
 
 const writeCollection = (file, collection) => {
