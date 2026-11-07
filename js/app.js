@@ -340,8 +340,7 @@
     const el = $('#chapter');
 
     const badges = `<ul class="pills">${t('hero.badges').map((b, i) => `<li class="pill pill-${i + 1}">${esc(b)}</li>`).join('')}</ul>`;
-    const cta = `<button type="button" class="btn btn-primary" id="cta-explore">${esc(t('exploreMap'))}</button>`
-      + `<p class="all-projects"><a class="ext-link" href="${ALL_PROJECTS_URL}" target="_blank" rel="noopener noreferrer">`
+    const cta = `<p class="all-projects"><a class="ext-link" href="${ALL_PROJECTS_URL}" target="_blank" rel="noopener noreferrer">`
       + `<span>${esc(t('allProjects'))}</span>${ICONS.external}<span class="sr-only"> (${esc(t('a11y.externalLink'))})</span></a></p>`;
     el.className = 'chapter chapter-hero';
     el.innerHTML = `
@@ -854,14 +853,6 @@
 
   function bindEvents() {
     $$('.lang-btn').forEach((btn) => btn.addEventListener('click', () => setLanguage(btn.dataset.lang)));
-
-    // The call-to-action returns to the city overview and brings the map into view
-    $('#chapter').addEventListener('click', (e) => {
-      if (!e.target.closest('#cta-explore')) return;
-      closePopup();
-      if (state.mapReady) map.flyTo({ center: INITIAL_VIEW.center, zoom: INITIAL_VIEW.zoom, ...flyOptions() });
-      $('#map').scrollIntoView({ behavior: prefersReducedMotion.matches ? 'auto' : 'smooth', block: 'nearest' });
-    });
 
     $('#legend-toggle').addEventListener('click', () => {
       const legend = $('#legend');
