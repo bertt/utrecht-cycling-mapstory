@@ -74,7 +74,9 @@
     'doorfietsroute-houten-utrecht-centrum': '#b0719a',
     'doorfietsroute-houten-culemborg': '#a1887f',
     'doorfietsroute-amersfoort-usp': '#6d4c41',
-    'doorfietsroute-mijdrecht-schiphol': '#9e9d24'
+    'doorfietsroute-mijdrecht-schiphol': '#9e9d24',
+    'doorfietsroute-ede-veenendaal-f112': '#1e88e5',
+    'doorfietsroute-bilthoven-uithof-houten': '#c62828'
   };
   const colorForFeature = (p) => F_ROUTE_COLORS[p.id] || CATEGORY_COLOR[p.category] || COLORS.gray;
 
@@ -375,7 +377,9 @@
     'doorfietsroute-houten-utrecht-centrum': ['Houten', 'Houten–Utrecht-Centrum'],
     'doorfietsroute-houten-culemborg': ['Culemb.', 'Houten–Culemborg'],
     'doorfietsroute-amersfoort-usp': ['Amersf.', 'Amersfoort–USP'],
-    'doorfietsroute-mijdrecht-schiphol': ['Schiphol', 'Mijdrecht–Schiphol']
+    'doorfietsroute-mijdrecht-schiphol': ['Schiphol', 'Mijdrecht–Schiphol'],
+    'doorfietsroute-ede-veenendaal-f112': ['F112', 'Ede–Veenendaal'],
+    'doorfietsroute-bilthoven-uithof-houten': ['Bilth.', 'Bilthoven–Uithof–Houten']
   };
 
   function renderLegend() {

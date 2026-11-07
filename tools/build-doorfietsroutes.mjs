@@ -11,6 +11,7 @@ const ROUTING = 'https://routing.openstreetmap.de/routed-bike/route/v1/driving/'
 const UA = 'utrecht-mapstory-dev-tool/1.0';
 
 // Anchors are [lon, lat] or a geocoding query string.
+const WIKI = 'https://nl.wikipedia.org/wiki/Lijst_van_Nederlandse_fietssnelwegen';
 const CENTRAAL = [5.1101, 52.0894];
 const ROUTES = [
   {
@@ -54,6 +55,18 @@ const ROUTES = [
     nl: 'Doorfietsroute Amersfoort–Bunschoten (F199)', en: 'Amersfoort–Bunschoten cycling route (F199)',
     anchors: ['Amersfoort Centraal', 'Bunschoten-Spakenburg'], status: 'afgerond', planning: ['Opgeleverd in mei 2024; de eerste doorfietsroute van de provincie', 'Completed in May 2024; the province\'s first through-route'],
     links: ['Amersfoort', 'Bunschoten']
+  },
+  {
+    id: 'doorfietsroute-ede-veenendaal-f112', slug: '', code: 'F112', url: WIKI, source: 'nl.wikipedia.org',
+    nl: 'Doorfietsroute Ede–Veenendaal (F112)', en: 'Ede–Veenendaal cycling route (F112)',
+    anchors: ['Ede-Wageningen station', 'Veenendaal-De Klomp station'], status: 'afgerond', planning: ['Klaar; in fases verbeterd vanaf 2012, laatste aanpassingen in Ede in 2022', 'Completed; improved in phases from 2012, final works in Ede in 2022'],
+    links: ['Ede', 'Veenendaal']
+  },
+  {
+    id: 'doorfietsroute-bilthoven-uithof-houten', slug: '', code: '', url: WIKI, source: 'nl.wikipedia.org',
+    nl: 'Snelfietsroute Bilthoven–De Uithof–Houten', en: 'Bilthoven–De Uithof–Houten cycling route',
+    anchors: ['Bilthoven station', 'Utrecht Science Park', 'Houten station'], status: 'in uitvoering', planning: ['Deels gereed; het stuk Bilthoven–De Uithof is gerealiseerd', 'Partly completed; the Bilthoven–De Uithof section is done'],
+    links: ['Bilthoven', 'De Uithof', 'Houten']
   },
   {
     id: 'doorfietsroute-houten-utrecht-centrum', slug: '', code: '',
@@ -107,7 +120,7 @@ for (const r of ROUTES) {
     for (const a of r.anchors) coords.push(typeof a === 'string' ? await geocode(a) : a);
     const line = await snap(coords);
     const label = r.code ? ` (${r.code})` : '';
-    const url = r.slug ? PAGE + r.slug : PAGE.slice(0, -1);
+    const url = r.url || (r.slug ? PAGE + r.slug : PAGE.slice(0, -1));
     features.push({
       type: 'Feature',
       properties: {
@@ -132,12 +145,12 @@ for (const r of ROUTES) {
           en: { cycling: 'Fast and comfortable cycling over longer distances.', green: '', safety: 'More space and more priority for cyclists.' }
         },
         connections: {
-          nl: 'Onderdeel van het netwerk van veertien doorfietsroutes van de provincie Utrecht.',
-          en: 'Part of the Province of Utrecht\'s network of fourteen through-routes.'
+          nl: 'Onderdeel van het netwerk van doorfietsroutes van de provincie Utrecht.',
+          en: 'Part of the Province of Utrecht\'s network of through-routes.'
         },
         url,
         urlType: r.slug ? 'province' : 'overview',
-        source: 'provincie-utrecht.nl'
+        source: r.source || 'provincie-utrecht.nl'
       },
       geometry: { type: 'LineString', coordinates: line }
     });
