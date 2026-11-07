@@ -25,6 +25,8 @@ const translations = {
     legendToggle: "Legenda tonen of verbergen",
     legendStatus: "Status",
     legendNow: "Er nu: klaar of in uitvoering",
+    cyclestreetInfo: "In een fietsstraat zijn fietsers de hoofdgebruiker; auto's zijn te gast en rijden maximaal 30 km/u.",
+    cyclestreetSource: "Bron: OpenStreetMap-bijdragers.",
     legendUpcoming: "Komt: in voorbereiding of gepland",
     legend: {
       main: "Hoofdfietsroutes",
@@ -32,6 +34,7 @@ const translations = {
       safety: "Veiligheid en rustiger verkeer",
       parking: "Fietsparkeren en overstappen",
       redesign: "Herinrichting",
+      cyclestreet: "Fietsstraat",
       regional: "Regionale verbindingen"
     },
     categories: {
@@ -118,6 +121,8 @@ const translations = {
     legendToggle: "Show or hide legend",
     legendStatus: "Status",
     legendNow: "Now: completed or under construction",
+    cyclestreetInfo: "On a bicycle street cyclists are the main users; cars are guests and may drive at most 30 km/h.",
+    cyclestreetSource: "Source: OpenStreetMap contributors.",
     legendUpcoming: "Coming: in preparation or planned",
     legend: {
       main: "Main cycling routes",
@@ -125,6 +130,7 @@ const translations = {
       safety: "Safety and calmer traffic",
       parking: "Bicycle parking and interchanges",
       redesign: "Urban redesign",
+      cyclestreet: "Bicycle street",
       regional: "Regional connections"
     },
     categories: {

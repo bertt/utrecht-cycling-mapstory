@@ -11,7 +11,7 @@
   const STORAGE_KEY = 'utrecht-mapstory-lang';
   const DEFAULT_LANG = 'nl';
   const SUPPORTED_LANGS = ['nl', 'en'];
-  const STYLE_URL = 'https://tiles.openfreemap.org/styles/liberty';
+  const STYLE_URL = 'https://tiles.openfreemap.org/styles/positron';
   const INITIAL_VIEW = { center: [5.1214, 52.0907], zoom: 12.2 };
   const FLY_DURATION = 1600;
   const DATA_FILES = ['data/routes.geojson', 'data/doorfietsroutes.geojson', 'data/projects.geojson', 'data/redesigns.geojson'];
@@ -37,8 +37,11 @@
     purple: '#8a5cf6',
     orange: '#e4572e',
     teal: '#0f4c5c',
-    gray: '#5d646b'
+    gray: '#5d646b',
+    cyclestreet: '#d1345b'
   };
+  const CYCLESTREETS_FILE = 'data/fietsstraten.geojson';
+  const CYCLESTREETS_SOURCE = 'cyclestreets';
 
   // Base colour and brighter "active" colour per project category.
   const CATEGORY_COLOR = {
@@ -336,8 +339,7 @@
     const items = [
       { key: 'main', color: COLORS.blue, type: 'line' },
       { key: 'regional', color: COLORS.teal, type: 'line' },
-      { key: 'green', color: COLORS.green, type: 'line' },
-      { key: 'safety', color: COLORS.amber, type: 'line' },
+      { key: 'cyclestreet', color: COLORS.cyclestreet, type: 'line' },
       { key: 'redesign', color: COLORS.orange, type: 'dot' }
     ];
     const rows = items.map((i) =>
@@ -416,6 +418,17 @@
       promoteId: 'id'
     });
 
+    // Bicycle streets (OSM data) sit below the project routes
+    map.addSource(CYCLESTREETS_SOURCE, { type: 'geojson', data: state.cyclestreets });
+    map.addLayer({
+      id: 'cyclestreet-casing', type: 'line', source: CYCLESTREETS_SOURCE, layout: lineLayout,
+      paint: { 'line-color': '#ffffff', 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 2, 16, 8], 'line-opacity': 0.9 }
+    });
+    map.addLayer({
+      id: 'cyclestreet-line', type: 'line', source: CYCLESTREETS_SOURCE, layout: lineLayout,
+      paint: { 'line-color': COLORS.cyclestreet, 'line-width': ['interpolate', ['linear'], ['zoom'], 11, 1, 16, 5] }
+    });
+
     map.addLayer({
       id: LAYER_IDS.fill, type: 'fill', source: SOURCE_ID,
       filter: ['==', ['geometry-type'], 'Polygon'],
@@ -434,7 +447,25 @@
         'line-opacity': opacityExpression(config, 1)
       }
     });
+    // Selection halo: drawn under the route casing, shown only for the selected project
+    const noSelection = ['==', ['get', 'id'], ''];
+    const haloPaint = {
+      'line-color': '#ffd23f',
+      'line-width': ['interpolate', ['linear'], ['zoom'], 9, 10, 15, 22],
+      'line-opacity': 0.75,
+      'line-blur': 2
+    };
+    map.addLayer({
+      id: 'selection-halo-area', type: 'line', source: SOURCE_ID,
+      filter: ['all', ['==', ['geometry-type'], 'Polygon'], noSelection],
+      layout: lineLayout, paint: haloPaint
+    });
     // White casing under all route lines for contrast
+    map.addLayer({
+      id: 'selection-halo', type: 'line', source: SOURCE_ID,
+      filter: ['all', lines, noSelection],
+      layout: lineLayout, paint: haloPaint
+    });
     map.addLayer({
       id: LAYER_IDS.casing, type: 'line', source: SOURCE_ID, filter: lines,
       layout: lineLayout,
@@ -511,9 +542,25 @@
   function setFeatureState(id, key, value) {
     if (!id || !state.mapReady) return;
     map.setFeatureState({ source: SOURCE_ID, id }, { [key]: value });
+    if (key === 'selected') showSelection(value ? id : null);
+  }
+
+  /** Show a halo under the selected route/area and enlarge its marker. */
+  function showSelection(id) {
+    const match = ['==', ['get', 'id'], id || ''];
+    map.setFilter('selection-halo', ['all', ['==', ['geometry-type'], 'LineString'], match]);
+    map.setFilter('selection-halo-area', ['all', ['==', ['geometry-type'], 'Polygon'], match]);
+    state.markers.forEach(({ element }, markerId) => element.classList.toggle('is-selected', markerId === id));
   }
 
   function bindLayerInteractions() {
+    map.on('mouseenter', 'cyclestreet-line', () => { map.getCanvas().style.cursor = 'pointer'; });
+    map.on('mouseleave', 'cyclestreet-line', () => { map.getCanvas().style.cursor = ''; });
+    map.on('click', 'cyclestreet-line', (e) => {
+      // Project layers take precedence when a project line overlaps a bicycle street
+      if (map.queryRenderedFeatures(e.point, { layers: [LAYER_IDS.solid, LAYER_IDS.planned, LAYER_IDS.fill] }).length) return;
+      openCyclestreet(e.features[0].properties.name, e.lngLat);
+    });
     const interactive = [LAYER_IDS.casing, LAYER_IDS.solid, LAYER_IDS.planned, LAYER_IDS.fill];
 
     interactive.forEach((layerId) => {
@@ -641,6 +688,27 @@
     labelPopupClose();
   }
 
+  function cyclestreetHTML(name) {
+    return `
+      <div class="popup">
+        <div class="card-tags"><span class="tag" style="--tag-color:${COLORS.cyclestreet}"><i aria-hidden="true"></i>${esc(t('legend.cyclestreet'))}</span></div>
+        <h3>${esc(name)}</h3>
+        <p>${esc(t('cyclestreetInfo'))}</p>
+        <p class="meta">${esc(t('cyclestreetSource'))}</p>
+      </div>`;
+  }
+
+  function openCyclestreet(name, lngLat) {
+    closePopup();
+    const popup = new maplibregl.Popup({ className: 'story-popup', maxWidth: '320px', offset: 12, focusAfterOpen: false })
+      .setLngLat(lngLat)
+      .setHTML(cyclestreetHTML(name))
+      .addTo(map);
+    popup.on('close', () => { if (state.popup === popup) state.popup = null; });
+    state.popup = popup;
+    labelPopupClose();
+  }
+
   function flyOptions() {
     return { duration: prefersReducedMotion.matches ? 0 : FLY_DURATION, essential: true };
   }
@@ -675,6 +743,12 @@
     return collections.flatMap((c) => c.features);
   }
 
+  async function loadCyclestreets() {
+    const response = await fetch(CYCLESTREETS_FILE);
+    if (!response.ok) throw new Error(`${CYCLESTREETS_FILE}: ${response.status}`);
+    return response.json();
+  }
+
   function showMapError() {
     const el = $('#map-error');
     el.textContent = t('mapError');
@@ -704,6 +778,7 @@
           if (fnumber && f.geometry.type === 'LineString') f.properties.fnumber = fnumber;
         });
         state.features = features;
+        state.cyclestreets = await loadCyclestreets();
         state.byId = new Map(features.map((f) => [f.properties.id, f]));
       } catch (error) {
         console.error('Could not load project data', error);

@@ -252,6 +252,11 @@ p { margin: 0 0 0.9em; }
   transition: transform 0.2s;
 }
 .marker:hover .marker-dot, .marker.is-hover .marker-dot { transform: scale(1.3); }
+.marker.is-selected { z-index: 2; }
+.marker.is-selected .marker-dot {
+  transform: scale(1.6);
+  box-shadow: 0 0 0 4px #ffd23f, 0 2px 8px rgba(0, 0, 0, 0.45);
+}
 .marker:focus-visible { outline: none; }
 .marker:focus-visible .marker-dot { outline: 3px solid var(--blue); outline-offset: 2px; }
 .marker.is-dimmed { opacity: 0.35; }
