@@ -301,6 +301,11 @@ p { margin: 0 0 0.9em; }
   .story-popup .maplibregl-popup-content { max-height: 45dvh; overflow-y: auto; }
 }
 
+/* Short desktop windows: drop secondary content so the panel never needs a scrollbar */
+@media (min-width: 821px) and (max-height: 720px) {
+  .panel-footer, .pills { display: none; }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
