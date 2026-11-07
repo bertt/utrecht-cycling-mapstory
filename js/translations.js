@@ -78,7 +78,7 @@ const translations = {
     },
     github: "GitHub",
     hero: {
-      badges: ["Voorrang aan lopen, fietsen en OV", "Meer groen en ruimte", "Veiliger én prettiger"]
+      badges: ["Al open: F28, F12 en meer", "In uitvoering tot 2028", "Nog in voorbereiding"]
     },
     mapError: "De kaartgegevens konden niet worden geladen. Open de site via een webserver (bijvoorbeeld GitHub Pages).",
     footer: {
@@ -89,9 +89,9 @@ const translations = {
       {
         title: "Utrecht in beweging",
         nav: "Intro",
-        lead: "We maken Utrecht aantrekkelijk en bereikbaar voor iedereen.",
+        lead: "Het fietsnetwerk rond Utrecht groeit.",
         body: [
-          "Utrecht geeft voorrang aan lopen, fietsen en openbaar vervoer en maakt meer ruimte voor groen, spelen en verblijven. Op de kaart zie je de verkeersprojecten van de stad; klik op een punt of lijn voor meer informatie."
+          "Meerdere doorfietsroutes (F-routes) zijn al open, zoals de F28 naar Amersfoort. Andere zijn in uitvoering of in voorbereiding, tot ongeveer 2028. Doorgetrokken lijnen zijn er nu, gestippelde komen nog. Klik op een lijn of punt voor meer informatie."
         ]
       }
     ]
@@ -171,7 +171,7 @@ const translations = {
     },
     github: "GitHub",
     hero: {
-      badges: ["Priority for walking, cycling and transit", "More green space", "Safer and more pleasant"]
+      badges: ["Already open: F28, F12 and more", "Under construction until 2028", "Still in preparation"]
     },
     mapError: "The map data could not be loaded. Open the site through a web server (for example GitHub Pages).",
     footer: {
@@ -182,9 +182,9 @@ const translations = {
       {
         title: "Utrecht on the Move",
         nav: "Intro",
-        lead: "We are making Utrecht attractive and accessible for everyone.",
+        lead: "The cycling network around Utrecht is growing.",
         body: [
-          "Utrecht gives priority to walking, cycling and public transport and creates more space for greenery, play and spending time outdoors. The map shows the city's traffic projects; click a point or line for more information."
+          "Several fast cycling routes (F-routes) are already open, such as the F28 to Amersfoort. Others are under construction or in preparation, through about 2028. Solid lines exist today, dashed lines are still to come. Click a line or point for more information."
         ]
       }
     ]
