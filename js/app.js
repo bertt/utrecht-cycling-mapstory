@@ -188,6 +188,7 @@
     switch (geometry.type) {
       case 'Point': return [geometry.coordinates];
       case 'LineString': return geometry.coordinates;
+      case 'MultiLineString': return geometry.coordinates.flat();
       case 'Polygon': return geometry.coordinates[0];
       default: return [];
     }
@@ -198,6 +199,10 @@
     const coords = allCoordinates(geometry);
     if (geometry.type === 'Point') return coords[0];
     if (geometry.type === 'LineString') return coords[Math.floor((coords.length - 1) / 2)];
+    if (geometry.type === 'MultiLineString') {
+      const longest = geometry.coordinates.reduce((a, b) => (b.length > a.length ? b : a));
+      return longest[Math.floor((longest.length - 1) / 2)];
+    }
     const ring = coords.slice(0, -1);
     const sum = ring.reduce((acc, c) => [acc[0] + c[0], acc[1] + c[1]], [0, 0]);
     return [sum[0] / ring.length, sum[1] / ring.length];
@@ -833,7 +838,7 @@
           // F-route number (e.g. "F28") used for the line label
           const match = /\bF\d+\b/.exec(f.properties.title.nl);
           const fnumber = F_NUMBER_OVERRIDES[f.properties.id] || (match && match[0]);
-          if (fnumber && f.geometry.type === 'LineString') f.properties.fnumber = fnumber;
+          if (fnumber && f.geometry.type.endsWith('LineString')) f.properties.fnumber = fnumber;
         });
         state.features = features;
         state.cyclestreets = await loadCyclestreets();
