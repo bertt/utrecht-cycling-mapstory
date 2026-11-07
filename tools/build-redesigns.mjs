@@ -103,19 +103,55 @@ function phaseOf(text) {
   return { status, start };
 }
 
+// Concrete planning taken from the project pages where the "Fase project" line has no date.
+const PLANNING = {
+  'catharijnesingel-inrichten-als-bestemming': {
+    status: 'afgerond',
+    nl: 'Uitgevoerd: afgesloten voor doorgaand autoverkeer sinds 21 september 2026; boetes vanaf 1 januari 2027',
+    en: 'Completed: closed to through traffic since 21 September 2026; fines from 1 January 2027'
+  },
+  'meernbrug-hefbrug-centrum-de-meern-verbeteren-verkeersveiligheid': {
+    nl: 'Besluit door nieuw college najaar 2026; eerste maatregelen in 2026, fietsstraat Castellumlaan voorlopig 2027',
+    en: 'Decision by the new council in autumn 2026; first measures in 2026, Castellumlaan cycle street provisionally 2027'
+  },
+  'welgelegen-en-den-hommel-opnieuw-inrichten': {
+    nl: 'Uitvoering 2027–2028; start naar verwachting begin 2027',
+    en: 'Construction 2027–2028; start expected in early 2027'
+  },
+  'kanaleneiland-zuid-midden-opnieuw-inrichten': {
+    nl: 'Ontwerp 2025–2027; start werkzaamheden waarschijnlijk in 2028',
+    en: 'Design 2025–2027; works probably start in 2028'
+  },
+  'biltse-rading-verbeteren-verkeersveiligheid': {
+    nl: 'Voetgangersoversteek al aangepast; start verdere aanpassingen nog niet bekend',
+    en: 'Pedestrian crossing already improved; start of further changes not yet known'
+  },
+  'boorstraat-tunnel-voor-fietsers-en-voetgangers': {
+    nl: 'Ontwerp voorgelegd aan het college in september 2026; raadsbesluit verwacht in 2027; bouw nog niet gepland',
+    en: 'Design presented to the council in September 2026; council decision expected in 2027; construction not yet scheduled'
+  },
+  'castellumlaan-opnieuw-inrichten': {
+    nl: 'Riolering wordt binnen enkele jaren vervangen; start uitvoering nog niet bekend',
+    en: 'Sewer to be replaced within a few years; construction start not yet known'
+  }
+};
+
 const features = [];
 for (const [path, nl, en, query, kind] of PROJECTS) {
   const url = BASE + path;
   const html = await (await fetch(url, { headers: { 'User-Agent': UA } })).text();
   const text = decode(html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ');
   const meta = decode((html.match(/<meta[^>]+name="description"[^>]+content="([^"]*)"/i) || html.match(/<meta[^>]+content="([^"]*)"[^>]+name="description"/i) || [])[1] || '');
-  const { status, start } = phaseOf(text);
+  const parsed = phaseOf(text);
+  const known = PLANNING[path.split('/').pop()];
+  const status = known?.status || parsed.status;
+  const start = known ? '' : parsed.start;
   const coord = await geocode(query);
   await sleep(1100);
   if (!coord) { console.log('NO GEOCODE', query); continue; }
   const k = KIND[kind];
-  const planningNl = start ? `Planning: ${start}` : 'Zie de projectpagina voor de actuele planning';
-  const planningEn = start ? `Planning: ${start.replace(/nog niet bekend/i, 'not yet known')}` : 'See the project page for the latest planning';
+  const planningNl = known ? known.nl : start ? `Planning: ${start}` : 'Zie de projectpagina voor de actuele planning';
+  const planningEn = known ? known.en : start ? `Planning: ${start.replace(/nog niet bekend/i, 'not yet known')}` : 'See the project page for the latest planning';
   features.push({
     type: 'Feature',
     properties: {
