@@ -357,21 +357,21 @@
   // ---------------------------------------------------------------------------
   // Short legend labels per F-route (place names, so no translation needed)
   const F_ROUTE_LABELS = {
-    'doorfietsroute-utrecht-amersfoort': 'F28 Amersfoort',
-    'doorfietsroute-utrecht-hilversum': 'F27 Hilversum',
-    'dom-tot-damroute': 'F2 Dom–Dam',
-    'fietsroute-utrecht-houten-f409': 'F409 Houten',
-    'doorfietsroute-woerden-utrecht-f12': 'F12 Woerden',
-    'doorfietsroute-utrecht-ijsselstein-f408': 'F408 IJsselstein',
-    'doorfietsroute-usp-veenendaal-f225': 'F225 Veenendaal',
-    'doorfietsroute-hilversum-amersfoort-f1': 'F1 Hilversum–Amersfoort',
-    'doorfietsroute-houten-castellum-usp-f27': 'F27 Castellum–USP',
-    'doorfietsroute-houten-lage-weide-f409': 'F409 Lage Weide',
-    'doorfietsroute-amersfoort-bunschoten-f199': 'F199 Bunschoten',
-    'doorfietsroute-houten-utrecht-centrum': 'Houten–Centrum',
-    'doorfietsroute-houten-culemborg': 'Houten–Culemborg',
-    'doorfietsroute-amersfoort-usp': 'Amersfoort–USP',
-    'doorfietsroute-mijdrecht-schiphol': 'Mijdrecht–Schiphol'
+    'doorfietsroute-utrecht-amersfoort': ['F28', 'Utrecht–Amersfoort'],
+    'doorfietsroute-utrecht-hilversum': ['F27', 'Utrecht–Hilversum'],
+    'dom-tot-damroute': ['F2', 'Dom–Dam'],
+    'fietsroute-utrecht-houten-f409': ['F409', 'Utrecht–Houten'],
+    'doorfietsroute-woerden-utrecht-f12': ['F12', 'Woerden–Utrecht'],
+    'doorfietsroute-utrecht-ijsselstein-f408': ['F408', 'Utrecht–IJsselstein'],
+    'doorfietsroute-usp-veenendaal-f225': ['F225', 'USP–Veenendaal'],
+    'doorfietsroute-hilversum-amersfoort-f1': ['F1', 'Hilversum–Amersfoort'],
+    'doorfietsroute-houten-castellum-usp-f27': ['F27 USP', 'Houten Castellum–USP'],
+    'doorfietsroute-houten-lage-weide-f409': ['F409 LW', 'Houten–Lage Weide'],
+    'doorfietsroute-amersfoort-bunschoten-f199': ['F199', 'Amersfoort–Bunschoten'],
+    'doorfietsroute-houten-utrecht-centrum': ['Houten', 'Houten–Utrecht-Centrum'],
+    'doorfietsroute-houten-culemborg': ['Culemb.', 'Houten–Culemborg'],
+    'doorfietsroute-amersfoort-usp': ['Amersf.', 'Amersfoort–USP'],
+    'doorfietsroute-mijdrecht-schiphol': ['Schiphol', 'Mijdrecht–Schiphol']
   };
 
   function renderLegend() {
@@ -382,8 +382,8 @@
     ];
     const rows = items.map((i) =>
       `<li><span class="swatch swatch-${i.type}" style="--c:${i.color}" aria-hidden="true"></span>${esc(t('legend.' + i.key))}</li>`);
-    const fRoutes = Object.entries(F_ROUTE_LABELS).map(([id, label]) =>
-      `<li><span class="swatch" style="--c:${F_ROUTE_COLORS[id]}" aria-hidden="true"></span>${esc(label)}</li>`);
+    const fRoutes =     Object.entries(F_ROUTE_LABELS).map(([id, [label, full]]) =>
+          `<li title="${esc(full)}"><span class="swatch" style="--c:${F_ROUTE_COLORS[id]}" aria-hidden="true"></span>${esc(label)}</li>`);
     rows.splice(1, 0,
       `<li class="legend-group">${esc(t('legend.regional'))}<ul class="legend-froutes">${fRoutes.join('')}</ul></li>`);
     rows.push(`<li class="legend-sep">${esc(t('legendStatus'))}</li>`);
