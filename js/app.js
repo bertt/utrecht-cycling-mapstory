@@ -503,6 +503,39 @@
       promoteId: 'id'
     });
 
+    // Light green tint for parks, grass and woods in the basemap
+    if (map.getLayer('park')) map.setPaintProperty('park', 'fill-color', '#d3e8cf');
+    if (map.getLayer('landcover_wood')) map.setPaintProperty('landcover_wood', 'fill-color', '#cfe3cb');
+    if (map.getLayer('water')) map.setPaintProperty('water', 'fill-color', '#c6dcec');
+    if (map.getLayer('waterway')) map.setPaintProperty('waterway', 'line-color', '#c6dcec');
+    // Make railways stand out more
+    ['railway', 'railway_service', 'railway_transit'].forEach((id) => {
+      if (map.getLayer(id)) map.setPaintProperty(id, 'line-color', '#9a9a9a');
+    });
+    if (map.getLayer('railway')) {
+      map.setLayerZoomRange('railway', 8, 24);
+      map.setPaintProperty('railway', 'line-width', ['interpolate', ['exponential', 1.3], ['zoom'], 8, 1, 12, 1.8, 16, 3.5, 20, 8]);
+    }
+    if (map.getLayer('railway_dashline')) {
+      map.setLayerZoomRange('railway_dashline', 12, 24);
+      map.setPaintProperty('railway_dashline', 'line-color', '#f2f2f2');
+      map.setPaintProperty('railway_dashline', 'line-width', ['interpolate', ['exponential', 1.3], ['zoom'], 10, 0, 14, 1, 16, 2, 20, 6]);
+    }
+    if (map.getSource('openmaptiles') && !map.getLayer('green-landuse')) {
+      const firstLine = map.getStyle().layers.find((l) => l.type === 'line' || l.type === 'symbol');
+      const before = firstLine && firstLine.id;
+      map.addLayer({
+        id: 'green-landcover', type: 'fill', source: 'openmaptiles', 'source-layer': 'landcover',
+        filter: ['in', ['get', 'class'], ['literal', ['grass']]],
+        paint: { 'fill-color': '#d9ebd3' }
+      }, before);
+      map.addLayer({
+        id: 'green-landuse', type: 'fill', source: 'openmaptiles', 'source-layer': 'landuse',
+        filter: ['in', ['get', 'class'], ['literal', ['park', 'playground', 'pitch', 'cemetery', 'garden', 'allotments']]],
+        paint: { 'fill-color': '#d3e8cf' }
+      }, before);
+    }
+
     // 3D buildings from the basemap's OpenMapTiles building layer, below all project layers
     if (map.getSource('openmaptiles') && !map.getLayer('buildings-3d')) {
       map.addLayer({
