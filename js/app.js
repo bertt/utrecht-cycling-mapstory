@@ -468,6 +468,19 @@
       promoteId: 'id'
     });
 
+    // 3D buildings from the basemap's OpenMapTiles building layer, below all project layers
+    if (map.getSource('openmaptiles') && !map.getLayer('buildings-3d')) {
+      map.addLayer({
+        id: 'buildings-3d', type: 'fill-extrusion', source: 'openmaptiles', 'source-layer': 'building', minzoom: 14,
+        paint: {
+          'fill-extrusion-color': '#d9d9d9',
+          'fill-extrusion-height': ['coalesce', ['get', 'render_height'], 6],
+          'fill-extrusion-base': ['coalesce', ['get', 'render_min_height'], 0],
+          'fill-extrusion-opacity': 0.8
+        }
+      });
+    }
+
     // Bicycle streets (OSM data) sit below the project routes
     map.addSource(CYCLESTREETS_SOURCE, { type: 'geojson', data: state.cyclestreets });
     map.addLayer({
@@ -794,7 +807,7 @@
       const cam = map.cameraForBounds(computeBounds(feature.geometry), { padding, maxZoom: 15.5 });
       target = cam ? { center: cam.center, zoom: cam.zoom } : { center: feature.anchor, zoom: 13 };
     }
-    map.flyTo({ ...target, ...flyOptions() });
+    map.flyTo({ ...target, pitch: 45, ...flyOptions() });
     openProject(id);
   }
 
