@@ -703,23 +703,25 @@
       }
     });
 
-    // F-route number labels along the lines
+    // Motorway shield labels are replaced by boxed F-route labels (same shield sprites)
+    ['highway-shield-non-us', 'highway-shield-us-interstate', 'road_shield_us'].forEach((id) => {
+      if (map.getLayer(id)) map.setLayoutProperty(id, 'visibility', 'none');
+    });
+
+    // F-route number labels in a box along the lines
     map.addLayer({
       id: 'route-fnumber', type: 'symbol', source: SOURCE_ID,
       filter: ['has', 'fnumber'],
       layout: {
         'symbol-placement': 'line',
-        'symbol-spacing': 400,
-        'text-field': ['get', 'fnumber'],
-        'text-font': ['Noto Sans Bold'],
-        'text-size': 12,
-        'text-keep-upright': true,
-        'text-allow-overlap': false
-      },
-      paint: {
-        'text-color': '#14653a',
-        'text-halo-color': '#ffffff',
-        'text-halo-width': 2
+        'symbol-spacing': 200,
+        'icon-image': ['concat', 'road_', ['max', 2, ['min', 6, ['length', ['to-string', ['get', 'fnumber']]]]]],
+        'icon-rotation-alignment': 'viewport',
+        'icon-size': 1,
+        'text-field': ['to-string', ['get', 'fnumber']],
+        'text-font': ['Noto Sans Regular'],
+        'text-rotation-alignment': 'viewport',
+        'text-size': 10
       }
     });
 
