@@ -405,6 +405,14 @@
   function syncLegendMode(initial) {
     const toggle = $('#legend-toggle');
     const legend = $('#legend');
+    // Desktop: legend sits in the left panel under the text; mobile: overlay on the map
+    if (!mobileQuery.matches) {
+      $('#story').insertBefore(legend, $('.panel-footer'));
+      legend.classList.add('legend-inline');
+    } else {
+      $('.map-wrap').appendChild(legend);
+      legend.classList.remove('legend-inline');
+    }
     if (!mobileQuery.matches) {
       legend.dataset.collapsed = 'false';
       toggle.disabled = true;
