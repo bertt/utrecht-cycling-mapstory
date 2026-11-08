@@ -83,8 +83,8 @@
 
   // Line widths (px at mid zoom) per category: thicker for main routes.
   const CATEGORY_WIDTH = {
-    hoofdfietsroute: 4,
-    doorfietsroute: 4,
+    hoofdfietsroute: 5.5,
+    doorfietsroute: 5.5,
     herinrichting: 2.6,
     fietsenstalling: 3,
     buurtstalling: 3
