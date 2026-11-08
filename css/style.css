@@ -216,6 +216,10 @@ p { margin: 0 0 0.9em; }
 .panel-footer p { margin-bottom: 0.4em; color: var(--muted); }
 
 /* ---------- Legend ---------- */
+/* Scale and attribution share the bottom-left corner on one line */
+.maplibregl-ctrl-bottom-left { display: flex; align-items: flex-end; }
+.maplibregl-ctrl-bottom-left .maplibregl-ctrl { clear: none; }
+.maplibregl-ctrl-bottom-left .maplibregl-ctrl-attrib { margin-left: 0; }
 .legend {
   position: absolute; left: 12px; bottom: 36px; z-index: 3;
   background: rgba(255, 255, 255, 0.95); border-radius: 14px; box-shadow: var(--shadow);
