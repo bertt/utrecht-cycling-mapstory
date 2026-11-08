@@ -45,12 +45,23 @@
 
   <main class="layout">
     <aside id="story" class="story-panel" aria-label="Verhaal" data-i18n-aria="a11y.storyPanel">
-      <article id="chapter" class="chapter" tabindex="-1"></article>
+      <div class="panel-tabs" role="tablist">
+        <button type="button" id="tab-story" class="panel-tab" role="tab" aria-selected="true" aria-controls="pane-story" data-tab="story" data-i18n="tabStory">Verhaal</button>
+        <button type="button" id="tab-comments" class="panel-tab" role="tab" aria-selected="false" aria-controls="pane-comments" tabindex="-1" data-tab="comments" data-i18n="tabComments">Reacties</button>
+      </div>
 
-      <footer class="panel-footer">
-        <p data-i18n="footer.text"></p>
-        <p data-i18n="footer.attribution"></p>
-      </footer>
+      <div id="pane-story" class="tab-pane" role="tabpanel" aria-labelledby="tab-story">
+        <article id="chapter" class="chapter" tabindex="-1"></article>
+
+        <footer class="panel-footer">
+          <p data-i18n="footer.text"></p>
+          <p data-i18n="footer.attribution"></p>
+        </footer>
+      </div>
+
+      <div id="pane-comments" class="tab-pane" role="tabpanel" aria-labelledby="tab-comments" hidden>
+        <div id="giscus-container"></div>
+      </div>
     </aside>
 
     <section class="map-wrap">

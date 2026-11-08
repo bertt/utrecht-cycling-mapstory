@@ -251,6 +251,61 @@
     refreshPopup();
     const errorEl = $('#map-error');
     if (!errorEl.hidden) errorEl.textContent = t('mapError');
+    updateGiscusLang();
+  }
+
+  // ---------------------------------------------------------------------------
+  // Comment tab (giscus)
+  // ---------------------------------------------------------------------------
+  function loadGiscus() {
+    const container = $('#giscus-container');
+    if (container.childElementCount) return;
+    const s = document.createElement('script');
+    s.src = 'https://giscus.app/client.js';
+    s.async = true;
+    s.crossOrigin = 'anonymous';
+    Object.entries({
+      'data-repo': 'bertt/utrecht-cycling-mapstory',
+      'data-repo-id': 'R_kgDOVmNUPw',
+      'data-category': 'General',
+      'data-category-id': 'DIC_kwDOVmNUP84DKp9B',
+      'data-mapping': 'pathname',
+      'data-strict': '0',
+      'data-reactions-enabled': '1',
+      'data-emit-metadata': '0',
+      'data-input-position': 'top',
+      'data-theme': 'light',
+      'data-lang': state.lang,
+      'data-loading': 'lazy',
+    }).forEach(([k, v]) => s.setAttribute(k, v));
+    container.appendChild(s);
+  }
+
+  function updateGiscusLang() {
+    const frame = document.querySelector('iframe.giscus-frame');
+    if (frame) frame.contentWindow.postMessage({ giscus: { setConfig: { lang: state.lang } } }, 'https://giscus.app');
+  }
+
+  function initTabs() {
+    const tabs = $$('.panel-tab');
+    const select = (name) => {
+      tabs.forEach((tab) => {
+        const active = tab.dataset.tab === name;
+        tab.setAttribute('aria-selected', String(active));
+        tab.tabIndex = active ? 0 : -1;
+        $('#pane-' + tab.dataset.tab).hidden = !active;
+      });
+      if (name === 'comments') loadGiscus();
+    };
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => select(tab.dataset.tab));
+      tab.addEventListener('keydown', (e) => {
+        if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+        const next = tabs[(tabs.indexOf(tab) + 1) % tabs.length];
+        select(next.dataset.tab);
+        next.focus();
+      });
+    });
   }
 
   function getStoredLanguage() {
@@ -436,7 +491,7 @@
     const legend = $('#legend');
     // Desktop: legend sits in the left panel under the text; mobile: overlay on the map
     if (!mobileQuery.matches) {
-      $('#story').insertBefore(legend, $('.panel-footer'));
+      $('.panel-footer').before(legend);
       legend.classList.add('legend-inline');
     } else {
       $('.map-wrap').appendChild(legend);
@@ -1018,6 +1073,7 @@
     bindEvents();
     syncLegendMode(true);
     setLanguage(getStoredLanguage(), { persist: false });
+    initTabs();
     initMap();
   }
 
