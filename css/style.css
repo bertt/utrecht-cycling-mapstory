@@ -248,6 +248,9 @@ p { margin: 0 0 0.9em; }
 .legend-list li.legend-group { display: block; }
 .legend-froutes { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, auto); gap: 2px 8px; font-size: 0.68rem; color: var(--muted); }
 .legend-froutes li { gap: 6px; }
+.legend-froutes a { color: inherit; text-decoration: underline dotted; }
+.legend-froutes a:hover { color: var(--text, inherit); text-decoration: underline; }
+.wiki-link { margin: 4px 0 0; }
 .legend-froutes .swatch { width: 16px; height: 5px; border-radius: 3px; }
 .legend-sep { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--line); font-weight: 600; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
 .marker-upcoming .marker-dot { background: #fff; border-color: var(--marker-color); }

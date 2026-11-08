@@ -327,6 +327,27 @@
       </article>`;
   }
 
+  // Routes with their own page on https://nl.wikipedia.org/wiki/Lijst_van_Nederlandse_fietssnelwegen
+  const WIKI_BASE = 'https://nl.wikipedia.org/wiki/';
+  const WIKI_PAGES = {
+    'doorfietsroute-utrecht-amersfoort': 'Snelfietsroute_Amersfoort-Utrecht',
+    'doorfietsroute-woerden-utrecht-f12': 'Snelfietsroute_Woerden-Utrecht',
+    'doorfietsroute-utrecht-ijsselstein-f408': 'Snelfietsroute_IJsselstein_-_Nieuwegein_-_Utrecht',
+    'doorfietsroute-usp-veenendaal-f225': 'Snelfietsroute_Veenendaal_-_Utrecht',
+    'doorfietsroute-ede-veenendaal-f112': 'Doorfietsroute_Ede-Veenendaal'
+  };
+
+  function wikiLink(id) {
+    return WIKI_PAGES[id] ? WIKI_BASE + WIKI_PAGES[id] : null;
+  }
+
+  function wikiLinkHTML(p) {
+    const url = wikiLink(p.id);
+    if (!url) return '';
+    return `<p class="wiki-link"><a class="ext-link" href="${esc(url)}" target="_blank" rel="noopener noreferrer">`
+      + `<span>${esc(t('wikipedia'))}</span>${ICONS.external}<span class="sr-only"> (${esc(t('a11y.externalLink'))})</span></a></p>`;
+  }
+
   function popupHTML(p) {
     return `
       <div class="popup">
@@ -336,6 +357,7 @@
         ${goalIcons(p)}
         <p class="meta"><strong>${esc(t('planning'))}:</strong> ${esc(loc(p.planning))}</p>
         ${officialLink(p)}
+        ${wikiLinkHTML(p)}
       </div>`;
   }
 
@@ -390,8 +412,13 @@
     ];
     const rows = items.map((i) =>
       `<li><span class="swatch swatch-${i.type}" style="--c:${i.color}" aria-hidden="true"></span>${esc(t('legend.' + i.key))}</li>`);
-    const fRoutes =     Object.entries(F_ROUTE_LABELS).map(([id, [label, full]]) =>
-          `<li title="${esc(full)}"><span class="swatch" style="--c:${F_ROUTE_COLORS[id]}" aria-hidden="true"></span>${esc(label)}</li>`);
+    const fRoutes = Object.entries(F_ROUTE_LABELS).map(([id, [label, full]]) => {
+      const url = wikiLink(id);
+      const text = url
+        ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" title="${esc(t('wikipedia'))}: ${esc(full)}">${esc(label)}</a>`
+        : esc(label);
+      return `<li title="${esc(full)}"><span class="swatch" style="--c:${F_ROUTE_COLORS[id]}" aria-hidden="true"></span>${text}</li>`;
+    });
     rows.splice(1, 0,
       `<li class="legend-group">${esc(t('legend.regional'))}<ul class="legend-froutes">${fRoutes.join('')}</ul></li>`);
     rows.push(`<li class="legend-sep">${esc(t('legendStatus'))}</li>`);
