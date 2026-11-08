@@ -36,6 +36,7 @@ const translations = {
       parking: "Fietsparkeren en overstappen",
       redesign: "Herinrichting",
       cyclestreet: "Fietsstraat",
+      station: "Treinstation",
       regional: "F-routes (regionaal)"
     },
     categories: {
@@ -133,6 +134,7 @@ const translations = {
       parking: "Bicycle parking and interchanges",
       redesign: "Urban redesign",
       cyclestreet: "Bicycle street",
+      station: "Train station",
       regional: "F-routes (regional)"
     },
     categories: {

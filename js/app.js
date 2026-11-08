@@ -12,6 +12,7 @@
   const DEFAULT_LANG = 'nl';
   const SUPPORTED_LANGS = ['nl', 'en'];
   const STYLE_URL = 'https://tiles.openfreemap.org/styles/positron';
+  const STATION_COLOR = '#1d3a8a';
   const INITIAL_VIEW = { center: [5.1214, 52.0907], zoom: 12.2 };
   const FLY_DURATION = 1600;
   const DATA_FILES = ['data/routes.geojson', 'data/doorfietsroutes.geojson', 'data/projects.geojson', 'data/redesigns.geojson'];
@@ -408,7 +409,8 @@
     const items = [
       { key: 'main', color: COLORS.blue, type: 'line' },
       { key: 'cyclestreet', color: COLORS.cyclestreet, type: 'line' },
-      { key: 'redesign', color: COLORS.orange, type: 'dot' }
+      { key: 'redesign', color: COLORS.orange, type: 'dot' },
+      { key: 'station', color: STATION_COLOR, type: 'dot' }
     ];
     const rows = items.map((i) =>
       `<li><span class="swatch swatch-${i.type}" style="--c:${i.color}" aria-hidden="true"></span>${esc(t('legend.' + i.key))}</li>`);
@@ -515,6 +517,13 @@
     if (map.getLayer('railway')) {
       map.setLayerZoomRange('railway', 8, 24);
       map.setPaintProperty('railway', 'line-width', ['interpolate', ['exponential', 1.3], ['zoom'], 8, 1, 12, 1.8, 16, 3.5, 20, 8]);
+    }
+    if (map.getLayer('railway_transit')) {
+      map.setLayerZoomRange('railway_transit', 10, 24);
+      map.setPaintProperty('railway_transit', 'line-width', ['interpolate', ['linear'], ['zoom'], 10, 1, 14, 2, 18, 4]);
+    }
+    if (map.getLayer('railway_transit_dashline')) {
+      map.setLayerZoomRange('railway_transit_dashline', 14, 24);
     }
     if (map.getLayer('railway_dashline')) {
       map.setLayerZoomRange('railway_dashline', 12, 24);
@@ -658,6 +667,32 @@
         'text-halo-width': 2
       }
     });
+
+    // Railway stations from the basemap POI layer, on top so they stay visible
+    if (map.getSource('openmaptiles')) {
+      const stationFilter = ['all', ['==', ['get', 'class'], 'railway'], ['==', ['get', 'subclass'], 'station']];
+      map.addLayer({
+        id: 'stations', type: 'circle', source: 'openmaptiles', 'source-layer': 'poi', minzoom: 10, filter: stationFilter,
+        paint: {
+          'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 4, 15, 8],
+          'circle-color': STATION_COLOR,
+          'circle-stroke-color': '#ffffff',
+          'circle-stroke-width': 2
+        }
+      });
+      map.addLayer({
+        id: 'station-labels', type: 'symbol', source: 'openmaptiles', 'source-layer': 'poi', minzoom: 12, filter: stationFilter,
+        layout: {
+          'text-field': ['coalesce', ['get', 'name:nl'], ['get', 'name']],
+          'text-font': ['Noto Sans Bold'],
+          'text-size': 12,
+          'text-anchor': 'top',
+          'text-offset': [0, 0.9],
+          'text-optional': true
+        },
+        paint: { 'text-color': STATION_COLOR, 'text-halo-color': '#ffffff', 'text-halo-width': 2 }
+      });
+    }
 
     bindLayerInteractions();
   }
