@@ -634,10 +634,28 @@
     state.markers.forEach(({ element }, markerId) => element.classList.toggle('is-selected', markerId === id));
   }
 
+  // Clicks on a point marker must always open that point's popup, never a line popup underneath
+  function markerFromEvent(e) {
+    const target = e.originalEvent && e.originalEvent.target;
+    return target && target.closest ? target.closest('.marker') : null;
+  }
+  function clickedOnMarker(e) {
+    return Boolean(markerFromEvent(e));
+  }
+
   function bindLayerInteractions() {
+    // Popups don't auto-close on map clicks, so a marker click can't be undone by the same click
+    map.on('click', (e) => {
+      if (clickedOnMarker(e)) return;
+      const hit = map.queryRenderedFeatures(e.point, {
+        layers: ['cyclestreet-hit', LAYER_IDS.casing, LAYER_IDS.solid, LAYER_IDS.planned, LAYER_IDS.fill]
+      });
+      if (!hit.length) closePopup();
+    });
     map.on('mouseenter', 'cyclestreet-hit', () => { map.getCanvas().style.cursor = 'pointer'; });
     map.on('mouseleave', 'cyclestreet-hit', () => { map.getCanvas().style.cursor = ''; });
     map.on('click', 'cyclestreet-hit', (e) => {
+      if (clickedOnMarker(e)) return;
       // Project layers take precedence when a project line overlaps a bicycle street
       if (map.queryRenderedFeatures(e.point, { layers: [LAYER_IDS.solid, LAYER_IDS.planned, LAYER_IDS.fill] }).length) return;
       openCyclestreet(e.features[0].properties.name, e.lngLat);
@@ -661,6 +679,7 @@
         state.hoverId = null;
       });
       map.on('click', layerId, (e) => {
+        if (clickedOnMarker(e)) return;
         openProject(e.features[0].properties.id, { lngLat: e.lngLat });
       });
     });
@@ -671,14 +690,18 @@
   // ---------------------------------------------------------------------------
   function createMarkers() {
     state.features.forEach((feature) => {
+      // Lines are clickable themselves; a midpoint marker would only be a confusing extra target
+      if (feature.geometry.type.endsWith('LineString')) return;
       const p = feature.properties;
       const el = document.createElement('button');
       el.type = 'button';
       const isParking = p.category === 'fietsenstalling' || p.category === 'buurtstalling';
       el.className = 'marker' + (p.major ? ' marker-major' : '') + (isParking ? ' marker-minor' : '')
+        + (p.category === 'herinrichting' ? ' marker-redesign' : '')
         + (UPCOMING.includes(p.status) ? ' marker-upcoming' : '');
       el.style.setProperty('--marker-color', colorForFeature(p));
       el.innerHTML = '<span class="marker-pulse"></span><span class="marker-dot"></span>';
+      el.dataset.id = p.id;
       el.addEventListener('click', (e) => {
         e.stopPropagation();
         openProject(p.id);
@@ -741,7 +764,7 @@
     state.popupId = id;
     setFeatureState(id, 'selected', true);
 
-    const popup = new maplibregl.Popup({ className: 'story-popup', maxWidth: '320px', offset: 16, focusAfterOpen: false })
+    const popup = new maplibregl.Popup({ className: 'story-popup', closeOnClick: false, maxWidth: '320px', offset: 16, focusAfterOpen: false })
       .setLngLat(lngLat || feature.anchor)
       .setHTML(popupHTML(feature.properties))
       .addTo(map);
@@ -783,7 +806,7 @@
   function openCyclestreet(name, lngLat) {
     closePopup();
     map.setFilter('cyclestreet-halo', ['==', ['get', 'name'], name]);
-    const popup = new maplibregl.Popup({ className: 'story-popup', maxWidth: '320px', offset: 12, focusAfterOpen: false })
+    const popup = new maplibregl.Popup({ className: 'story-popup', closeOnClick: false, maxWidth: '320px', offset: 12, focusAfterOpen: false })
       .setLngLat(lngLat)
       .setHTML(cyclestreetHTML(name))
       .addTo(map);

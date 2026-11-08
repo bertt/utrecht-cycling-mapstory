@@ -6,32 +6,6 @@
     {
       "type": "Feature",
       "properties": {
-        "id": "fietsenstalling-vaartsche-rijn",
-        "title": { "nl": "Fietsenstalling Vaartsche Rijn", "en": "Vaartsche Rijn bicycle parking" },
-        "category": "fietsenstalling",
-        "status": "in voorbereiding",
-        "major": true,
-        "planning": { "nl": "Zie projectpagina voor actuele planning", "en": "See the project page for the current schedule" },
-        "description": {
-          "nl": "Station Vaartsche Rijn en de omliggende straten moeten bereikbaar blijven. Daarom komen er meer stallingsplekken voor fietsen.",
-          "en": "Vaartsche Rijn station and the surrounding streets must stay accessible. That is why more bicycle parking spaces are needed."
-        },
-        "goals": "fiets, leefbaarheid, overstappen",
-        "benefits": {
-          "nl": { "cycling": "Meer plek om de fiets te stallen en gemakkelijk over te stappen op de trein.", "green": "", "safety": "Minder fietsen op straat en in looproutes." },
-          "en": { "cycling": "More space to park and easily transfer to the train.", "green": "", "safety": "Fewer bikes cluttering streets and walking routes." }
-        },
-        "connections": {
-          "nl": "Ligt aan de route naar Houten en dicht bij de Fietsroute om de Zuid.",
-          "en": "On the route towards Houten and close to the Zuid route."
-        },
-        "url": "https://www.utrecht.nl/wonen-en-leven/verkeer/verkeersprojecten/station-vaartsche-rijn-grotere-fietsenstalling"
-      },
-      "geometry": { "type": "Point", "coordinates": [5.1222, 52.0789] }
-    },
-    {
-      "type": "Feature",
-      "properties": {
         "id": "fietsparkeren-springweg",
         "title": { "nl": "Fietsparkeren Springweg en binnenstad", "en": "Bicycle parking at Springweg and in the city centre" },
         "category": "buurtstalling",
