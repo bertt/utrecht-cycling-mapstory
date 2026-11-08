@@ -7,7 +7,7 @@ const translations = {
   nl: {
     siteTitle: "Utrecht in beweging",
     siteSubtitle: "Verkeersprojecten voor een aantrekkelijke en bereikbare stad",
-    pageTitle: "Utrecht in beweging – een kaartverhaal over verkeersprojecten",
+    pageTitle: "Utrecht in beweging – een kaartverhaal over verkeersprojecten (8 november 2026)",
     allProjects: "Alle verkeersprojecten van gemeente Utrecht",
     projectsHeading: "Verkeersprojecten op de kaart",
     exploreMap: "Verken de kaart",
@@ -104,7 +104,7 @@ const translations = {
   en: {
     siteTitle: "Utrecht on the Move",
     siteSubtitle: "Traffic projects for an attractive and accessible city",
-    pageTitle: "Utrecht on the Move – a map story about traffic projects",
+    pageTitle: "Utrecht on the Move – a map story about traffic projects (8 November 2026)",
     allProjects: "All traffic projects of the Municipality of Utrecht",
     projectsHeading: "Traffic projects on the map",
     exploreMap: "Explore the map",
